@@ -23,14 +23,15 @@ const calculateResult = (num1, num2, operation) => {
     }
 }
 
-const memory = (num, operation) => {
+const memory = (state, operation, target) => {
+    // console.log(state, operation, target)
     switch(operation) {
-        case('+'):
-            return num;
-        case('R'):
-            return num;
-        case('C'):
-            return 0;
+        case('M+'):
+            return state.total;
+        case('MR'):
+            return state.memory;
+        case('MC'):
+            return target === 'memory' ? 0 : state.total;
     }
 }
 
@@ -64,8 +65,8 @@ const reducer = (state, action) => {
         case(MEMORY):
             return ({
                 ...state,
-                total: memory(state.memory, action.payload),
-                memory: memory(state.total, action.payload)
+                memory: memory(state, action.payload, 'memory'),
+                total: memory(state, action.payload, 'total')
             })
         default:
             return state;

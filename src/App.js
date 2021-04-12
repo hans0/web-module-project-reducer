@@ -22,7 +22,7 @@ function App() {
   }
 
   const memoryHandler = (op) => {
-    dispatch(memory(op))
+    dispatch(memory(op));
   }
 
   return (
@@ -45,14 +45,22 @@ function App() {
               <CalcButton 
                 value={"M+"}
                 onClick={() => {
-                  memoryHandler('+')
+                  memoryHandler('M+')
                   console.log(state)
                 }}
               />
               <CalcButton 
                 value={"MR"}
+                onClick={() => {
+                  memoryHandler('MR')
+                }}
               />
-              <CalcButton value={"MC"}/>
+              <CalcButton 
+                value={"MC"}
+                onClick={() => {
+                  memoryHandler('MC')
+                }}
+              />
             </div>
 
             <div className="row">
