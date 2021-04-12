@@ -6,12 +6,24 @@ import TotalDisplay from './components/TotalDisplay';
 import CalcButton from './components/CalcButton';
 
 import reducer, { initialState } from './reducers';
-import { addOne } from './actions';
+import { addOne, applyNumber, changeOperation, clearDisplay, memory } from './actions';
 
 function App() {
 
   const [state, dispatch] = useReducer(reducer, initialState);
   // console.log(state, dispatch);
+
+  const numberHandler = (num) => {
+    dispatch(applyNumber(num));
+  }
+
+  const operatorHandler = (op) => {
+    dispatch(changeOperation(op));
+  }
+
+  const memoryHandler = (op) => {
+    dispatch(memory(op))
+  }
 
   return (
     <div className="App">
@@ -30,8 +42,16 @@ function App() {
             </div>
             
             <div className="row">
-              <CalcButton value={"M+"}/>
-              <CalcButton value={"MR"}/>
+              <CalcButton 
+                value={"M+"}
+                onClick={() => {
+                  memoryHandler('+')
+                  console.log(state)
+                }}
+              />
+              <CalcButton 
+                value={"MR"}
+              />
               <CalcButton value={"MC"}/>
             </div>
 
@@ -39,33 +59,93 @@ function App() {
               <CalcButton 
                 value={1}
                 onClick={() => {
-                  dispatch(addOne())
+                  numberHandler(1)
                 }}
               />
-              <CalcButton value={2}/>
-              <CalcButton value={3}/>
+              <CalcButton 
+                value={2}
+                onClick={() => {
+                  numberHandler(2)
+                }}
+              />
+              <CalcButton  
+                value={3}
+                onClick={() => {
+                  numberHandler(3)
+                }}
+              />
             </div>
 
             <div className="row">
-              <CalcButton value={4}/>
-              <CalcButton value={5}/>
-              <CalcButton value={6}/>
+              <CalcButton 
+                value={4}
+                onClick={() => {
+                  numberHandler(4)
+                }}
+              />
+              <CalcButton 
+                value={5}
+                onClick={() => {
+                  numberHandler(5)
+                }}
+              />
+              <CalcButton 
+                value={6}
+                onClick={() => {
+                  numberHandler(6)
+                }}
+              />
             </div>
 
             <div className="row">
-              <CalcButton value={7}/>
-              <CalcButton value={8}/>
-              <CalcButton value={9}/>
+              <CalcButton 
+                value={7}
+                onClick={() => {
+                  numberHandler(7)
+                }}
+              />
+              <CalcButton 
+                value={8}
+                onClick={() => {
+                  numberHandler(8)
+                }}
+              />
+              <CalcButton 
+                value={9}
+                onClick={() => {
+                  numberHandler(9)
+                }}
+              />
             </div>
 
             <div className="row">
-              <CalcButton value={"+"}/>
-              <CalcButton value={"*"}/>
-              <CalcButton value={"-"}/>
+              <CalcButton 
+                value={"+"}
+                onClick={() => 
+                  operatorHandler('+')
+                }
+              />
+              <CalcButton 
+                value={"*"}
+                onClick={() => 
+                  operatorHandler('*')
+                }
+              />
+              <CalcButton 
+                value={"-"}
+                onClick={() => 
+                  operatorHandler('-')
+                }
+              />
             </div>
 
             <div className="row ce_button">
-              <CalcButton value={"CE"}/>
+              <CalcButton 
+                value={"CE"}
+                onClick={() => {
+                  dispatch(clearDisplay())
+                }}
+              />
             </div>
 
           </form>
